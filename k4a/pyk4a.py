@@ -399,6 +399,10 @@ k4a_device_close.argtypes = (k4a_device_t,)
 
 c_uint8_p = ctypes.POINTER(ctypes.c_uint8)
 
+k4a_image_create = _k4a.k4a_image_create
+k4a_image_create.restype = ctypes.c_int
+k4a_image_create.argtypes = (ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.POINTER(k4a_image_t))
+
 k4a_image_get_buffer = _k4a.k4a_image_get_buffer
 k4a_image_get_buffer.restype = c_uint8_p
 k4a_image_get_buffer.argtypes = (k4a_image_t,)
@@ -422,3 +426,18 @@ k4a_capture_get_depth_image.argtypes = (k4a_capture_t,)
 k4a_capture_get_ir_image = _k4a.k4a_capture_get_ir_image
 k4a_capture_get_ir_image.restype = k4a_image_t
 k4a_capture_get_ir_image.argtypes = (k4a_capture_t,)
+
+k4a_calibration_3d_to_2d = _k4a.k4a_calibration_3d_to_2d
+k4a_calibration_3d_to_2d.restype = ctypes.c_int
+k4a_calibration_3d_to_2d.argtypes = (ctypes.POINTER(k4a_calibration_t), ctypes.POINTER(k4a_float3_t), ctypes.c_int, ctypes.c_int, ctypes.POINTER(k4a_float2_t), ctypes.POINTER(ctypes.c_int))
+
+k4a_transformation_destroy = _k4a.k4a_transformation_destroy
+k4a_transformation_destroy.argtypes = (k4a_transformation_t,)
+
+k4a_transformation_create = _k4a.k4a_transformation_create
+k4a_transformation_create.restype = k4a_transformation_t
+k4a_transformation_create.argtypes = (ctypes.POINTER(k4a_calibration_t),)
+
+k4a_transformation_depth_image_to_color_camera = _k4a.k4a_transformation_depth_image_to_color_camera
+k4a_transformation_depth_image_to_color_camera.restype = ctypes.c_int
+k4a_transformation_depth_image_to_color_camera.argtypes = (k4a_transformation_t, k4a_image_t, k4a_image_t)
